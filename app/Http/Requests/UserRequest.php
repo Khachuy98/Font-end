@@ -45,16 +45,16 @@ class UserRequest extends FormRequest
     public function storeRules(): array
     {
         return [
-            'code'              => 'required|min:1|max:20|unique:users',
-            'name'              => 'required|min:2|max:50',
-            'dateofbirth'       => 'required|date',
-            'phone'             => 'required|numeric',
-            'address'           => 'required|min:1|max:200',
-            'email'             => 'required|email|unique:users',
-            'img'               => 'required|file|image',
-            'password'          => 'required|min:6|max:30',
-            'confirmpassword'   => 'required|same:password',
-            'role'              => 'required|max:2'
+            // 'code'              => 'required|min:1|max:20|unique:users',
+            // 'name'              => 'required|min:2|max:50',
+            // 'dateofbirth'       => 'required|date',
+            // 'phone'             => 'required|numeric',
+            // 'address'           => 'required|min:1|max:200',
+            // 'email'             => 'required|email|unique:users',
+            // 'img'               => 'required|file|image',
+            // 'password'          => 'required|min:6|max:30',
+            // 'confirmpassword'   => 'required|same:password',
+            // 'role'              => 'required|max:2'
         ];
     }
     public function storeFilter()

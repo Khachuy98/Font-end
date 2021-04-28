@@ -54,7 +54,11 @@ class UserRepository
 
     public function get()
     {
-        return SessionUser::where('user_id', auth()->id())->first();
+        return SessionUser::where('user_id',auth()->id())->first();
+    }
+    public function getUser()
+    {
+        return User::findOrFail(auth()->id());
     }
 
     public function update($inputs, $id)
@@ -132,13 +136,15 @@ class UserRepository
 
     public function login($inputs)
     {
-        return SessionUser::create([
+        $sessiontoken = SessionUser::create([
             'token' => Str::random(40),
             'refresh_token' => Str::random(40),
             'token_expried' => date('Y-m-d H:i:s', strtotime('+30 day')),
             'refresh_token_expried' => date('Y-m-d H:i:s', strtotime('+360 day')),
-            'user_id' =>auth()->id()
+            'user_id' => auth()->id()
         ]);
+        $user = User::findOrFail(auth()->id());
+        return [$sessiontoken,$user];
     }
 
     public function updateToken($id)

@@ -20,20 +20,23 @@ class LoginController extends Controller
     }
     public function login(LoginRequest $request)
     {
-
         if(Auth::attempt($request->filter())){
             $checkTokenExit = $this->userRepository->get();
             if(empty($checkTokenExit)){
-                $userSession = new SessionUserResource($this->userRepository->login($request->filter()));
-                return $userSession;
+                $userSession = $this->userRepository->login($request->filter());
+                return response()->json([
+                    'code' => 200,
+                    'data' => $userSession,
+                ], 200);
             }else{
                 $userSession = $checkTokenExit;
-                return $userSession;
-            } 
-            return response()->json([
-                'code' => 200,
-                'data' => $userSession
-            ], 200);
+                $user= $this->userRepository->getUser();
+                $data1 = [$userSession, $user];
+                return response()->json([
+                    'code' => 200,
+                    'data' => $data1,
+                ], 200);
+            }
         }else{
             return response()->json([
                 'code' => 500,
