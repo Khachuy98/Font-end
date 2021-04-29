@@ -5,7 +5,7 @@
         <div class="col-12">
           <b-nav-form>
             <b-form-input
-              class="mr-sm-2"
+              class="search-"
               v-model="search"
               placeholder="Search"
               @keyup="searchUnit"
@@ -91,6 +91,7 @@
                 </b-modal>
 
                 <b-modal
+                class="modaledit"
                   id="modal-center"
                   ref="modal"
                   title="Edit category"
@@ -120,7 +121,7 @@
                     <!-- <b-button variant="secondary" @click="update()" class="b-close">Update</b-button> -->
                   </form>
                 </b-modal>
-                <pagination
+                <!-- <pagination
                   :data="category1.data"
                   @pagination-change-page="getResults"
                 ></pagination>
@@ -129,7 +130,7 @@
       :total-rows="rows"
       :per-page="perPage"
       aria-controls="my-table"
-    ></b-pagination>
+    ></b-pagination> -->
               </table>
             </template>
           </card>
@@ -144,14 +145,11 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 import Swal from "sweetalert2";
 import _ from "lodash";
-// import pagination from "laravel-vue-pagination";
 Vue.use(VueAxios, axios);
 export default {
   name: "add-category",
   data() {
     return {
-              perPage: 2,
-        currentPage: 1,
       search: "",
       isEdit: false,
       category1: {},
@@ -170,18 +168,9 @@ export default {
       ]
     };
   },
-  name: "c-table",
-  mounted() {
-          this.totalRows = this.category1.length
-  },
   created() {
     this.getItem();
   },
-    computed: {
-      rows() {
-        return this.category1
-      }
-    },
   methods: {
     searchUnit() {
       axios.get("http://127.0.0.1:8000/api/category?name=" + this.search).then(response => {
@@ -195,10 +184,6 @@ export default {
           this.category1 = response.data;
         });
     },
-    // logOut(){
-    //   var axa = "asda";
-    //   console.log(axa);
-    // },
     getItem() {
       var self = this;
       Vue.axios
@@ -300,6 +285,9 @@ export default {
   color: #212529;
   background-color: #0e6de9;
 }
+.search-{
+  margin-bottom: 20px;
+}
 .editcategory:active {
   color: #212529;
   background-color: #189ce9 !important;
@@ -319,5 +307,8 @@ export default {
   display: inline;
   cursor: pointer;
   border-radius: 5px;
+}
+.modaledit{
+  margin-top: 8F0px;
 }
 </style>

@@ -5,7 +5,7 @@
         <div class="col-12">
           <b-nav-form>
             <b-form-input
-              class="mr-sm-2"
+              class="search-"
               v-model="search"
               placeholder="Search"
               @keyup="searchUnit"
@@ -236,7 +236,6 @@ export default {
       ]
     };
   },
-  name: "s-table",
   props: {
     columns: Array,
     data: Array
@@ -257,6 +256,7 @@ export default {
       Vue.axios
         .get("http://127.0.0.1:8000/api/supplier")
         .then(function(resp) {
+          console.log(resp);
           self.supplier1 = resp.data;
           console.log("Data:", resp.data.data);
         })
@@ -348,6 +348,9 @@ export default {
 .editcategory:active {
   color: #212529;
   background-color: #189ce9 !important;
+}
+.search-{
+  margin-bottom: 20px;
 }
 .b-submit {
   background-color: rgb(248, 23, 23);

@@ -5,7 +5,7 @@
         <div class="col-12">
           <b-nav-form>
             <b-form-input
-              class="mr-sm-2"
+              class="search-"
               v-model="search"
               placeholder="Search"
               @keyup="searchUnit"
@@ -231,6 +231,7 @@
                   </form>
                 </b-modal>
                 <b-modal
+                hide-footer
                   size="lg"
                   id="modal-edit"
                   ref="modal"
@@ -310,8 +311,6 @@
                           >
                           </b-form-input>
                         </b-form-group>
-                      </b-col>
-                      <b-col lg="6">
                         <b-form-group
                           label="Email"
                           label-for="name-input"
@@ -325,6 +324,8 @@
                           >
                           </b-form-input>
                         </b-form-group>
+                      </b-col>
+                      <b-col lg="6">
                         <b-form-group label="Password" label-for="name-input">
                           <b-form-input
                             id="name-input"
@@ -357,7 +358,7 @@
                               class="img1"
                               :src="
                                 'http://127.0.0.1:8000/uploads/user/' +
-                                  formedit.img
+                                formedit.img
                               "
                             />
                           </div>
@@ -375,9 +376,12 @@
                             :options="status"
                           ></b-form-select>
                         </b-form-group>
-                        <b-button type="submit">Edit</b-button>
                       </b-col>
                     </b-row>
+                    <div class="bt-submit">
+                    <b-button type="submit">Edit</b-button>
+                    <b-button @click="closemodal" >Cancel</b-button>
+                    </div>
                   </form>
                 </b-modal>
               </table>
@@ -398,17 +402,17 @@ export default {
   // name: "add-category",
   data() {
     return {
-      search:"",
+      search: "",
       show1: false,
       form: null,
       isEdit: false,
       options: [
         { value: 1, text: "Admin" },
-        { value: 2, text: "Staff" }
+        { value: 2, text: "Staff" },
       ],
       status: [
         { value: 1, text: "Active" },
-        { value: 2, text: "InActive" }
+        { value: 2, text: "InActive" },
       ],
       image: "",
       user: [],
@@ -424,7 +428,7 @@ export default {
         password: "",
         role: "",
         status: "",
-        confirmpassword: ""
+        confirmpassword: "",
       },
 
       formedit: {
@@ -438,8 +442,8 @@ export default {
         img: [],
         role: "",
         status: "",
-        confirmpassword: ""
-      }
+        confirmpassword: "",
+      },
     };
   },
   mounted() {},
@@ -447,10 +451,12 @@ export default {
     this.getItem();
   },
   methods: {
-            searchUnit() {
-      axios.get("http://127.0.0.1:8000/api/user?name=" + this.search).then(response => {
-        this.user = response.data;
-      });
+    searchUnit() {
+      axios
+        .get("http://127.0.0.1:8000/api/user?name=" + this.search)
+        .then((response) => {
+          this.user = response.data;
+        });
     },
     handleAdd(bvModalEvt) {
       let formData = new FormData();
@@ -469,12 +475,12 @@ export default {
       console.log("NEw product", formData);
       axios
         .post(`http://127.0.0.1:8000/api/user`, formData)
-        .then(res => {
+        .then((res) => {
           this.getItem();
           console.log("Thành công");
           Swal.fire("Đã thêm!", "Thêm user thành công.", "success");
         })
-        .catch(error => {
+        .catch((error) => {
           this.getItem();
           Swal.fire("Failed!", error, "warning");
         });
@@ -496,7 +502,7 @@ export default {
       var reader = new FileReader();
       var vm = this;
 
-      reader.onload = e => {
+      reader.onload = (e) => {
         vm.image = e.target.result;
       };
       reader.readAsDataURL(file);
@@ -505,11 +511,11 @@ export default {
       var self = this;
       Vue.axios
         .get("http://127.0.0.1:8000/api/user")
-        .then(function(resp) {
+        .then(function (resp) {
           self.user = resp.data;
           console.log("Data:", resp.data.data);
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log("Loi:", error);
         });
     },
@@ -529,13 +535,13 @@ export default {
       formDT.append("status", this.formedit.status);
       axios
         .put("http://127.0.0.1:8000/api/user/" + this.formedit.id, formDT)
-        .then(res => {
+        .then((res) => {
           console.log(res.data.data);
           this.getItem();
           console.log("thành công");
           Swal.fire("Đã sửa!", "Sửa User thành công.", "success");
         })
-        .catch(function(error) {
+        .catch(function (error) {
           Swal.fire("Failed!", "Lỗi không sửa được", "warning");
         });
     },
@@ -557,13 +563,13 @@ export default {
       console.log("lay thu id", this.formedit.id);
       axios
         .put("http://127.0.0.1:8000/api/user/" + this.formedit.id, formDT)
-        .then(res => {
+        .then((res) => {
           console.log(res.data.data);
           this.getItem();
           console.log("thành công");
           Swal.fire("Đã sửa!", "Sửa User thành công.", "success");
         })
-        .catch(function(error) {
+        .catch(function (error) {
           Swal.fire("Failed!", "Lỗi không sửa được", "warning");
         });
       bvModalEvt.preventDefault();
@@ -577,7 +583,7 @@ export default {
       console.log("http://127.0.0.1:8000/api/user/" + id);
       axios
         .get("http://127.0.0.1:8000/api/user/" + id)
-        .then(res => {
+        .then((res) => {
           this.formedit.name = res.data.data.name;
           this.formedit.code = res.data.data.code;
           this.formedit.dateofbirth = res.data.data.dateofbirth;
@@ -591,7 +597,7 @@ export default {
 
           console.log("Thành công");
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log("lỗi:", error);
         });
     },
@@ -603,8 +609,8 @@ export default {
         showCancelButton: true,
         confirmButtonColor: "#d33",
         cancelButtonColor: "#3085d6",
-        confirmButtonText: "Yes, delete it!"
-      }).then(result => {
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
         if (result.value) {
           axios
             .delete(`http://127.0.0.1:8000/api/user/` + id)
@@ -613,7 +619,7 @@ export default {
               this.getItem();
               console.log("Thành công");
             })
-            .catch(error => {
+            .catch((error) => {
               this.getItem();
               Swal.fire("Failed!", error.message, "warning");
               console.log("Lỗi", error);
@@ -634,8 +640,8 @@ export default {
     },
     resetModal() {
       this.name = "";
-    }
-  }
+    },
+  },
 };
 </script>
 <style>
@@ -644,6 +650,12 @@ export default {
   padding: 4px 12px;
   margin-left: 1px;
   background-color: #0e6de9;
+}
+.search- {
+  margin-bottom: 20px;
+}
+.bt-submit{
+  float: right;
 }
 .img1 {
   width: 30%;

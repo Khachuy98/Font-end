@@ -46,7 +46,7 @@
         <button
           type="submit"
           class="btn btn-info btn-fill float-right"
-          @click.prevent="updateProfile"
+          @click.prevent="updateProfile()"
         >
           Update Profile
         </button>
@@ -68,8 +68,8 @@ export default {
   },
   data() {
     return {
+      isUser:null,
       user: {
-
         username: "",
         phone: null,
         address: "",
@@ -78,16 +78,21 @@ export default {
     };
   },
   created() {
-    this.getItem();
+    // this.getItem();
+        let token = JSON.parse(window.localStorage.getItem('auth'));
+    
+    console.log(token.id);
+    this.getItem(token.id);
   },
   methods: {
     // updateProfile() {
     //   alert("Your data: " + JSON.stringify(this.user));
     // },
-    getItem() {
+    getItem(id) {
+      this.isUser = id;
       var self = this;
       Vue.axios
-        .get("http://127.0.0.1:8000/api/userprofile/30")
+        .get("http://127.0.0.1:8000/api/userprofile/" + this.isUser)
         .then(function(resp) {
           self.user.username = resp.data.data.name;
           self.user.dateofbirth = resp.data.data.dateofbirth;
@@ -100,14 +105,8 @@ export default {
         });
     },
     updateProfile() {
-      var isEdit = this.user;
-      console.log(
-        "thành công:",
-        "http://127.0.0.1:8000/api/userprofile/30",
-        isEdit
-      );
       axios
-        .put("http://127.0.0.1:8000/api/userprofile/" + 30, isEdit)
+        .put("http://127.0.0.1:8000/api/userprofile/" + this.isUser , this.user)
         .then(res => {
           console.log(res.data.data);
           this.getItem();

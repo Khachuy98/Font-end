@@ -5,7 +5,7 @@
         <div class="col-12">
           <b-nav-form>
             <b-form-input
-              class="mr-sm-2"
+              class="search-"
               v-model="search"
               placeholder="Search"
               @keyup="searchUnit"
@@ -16,7 +16,7 @@
             body-classes="table-full-width table-responsive"
           >
             <template slot="header">
-              <h4 class="card-title">Chờ xác nhận</h4>
+              <h4 class="card-title" style="color :red">PENDING</h4>
               <table class="table category">
                 <thead>
                   <slot name="columns">
@@ -78,7 +78,7 @@
             body-classes="table-full-width table-responsive"
           >
             <template slot="header">
-              <h4 class="card-title">Đang vận chuyển</h4>
+              <h4 class="card-title" style="color: orange">SHIPPING</h4>
               <table class="table category">
                 <thead>
                   <slot name="columns">
@@ -137,7 +137,7 @@
             body-classes="table-full-width table-responsive"
           >
             <template slot="header">
-              <h4 class="card-title">Đã hoàn thành</h4>
+              <h4 class="card-title" style="color: green">COMPLETED</h4>
               <table class="table category">
                 <thead>
                   <slot name="columns">
@@ -172,7 +172,7 @@
                         <b-badge variant="danger">Đang vận chuyển</b-badge>
                       </div>
                       <div v-else>
-                        <b-badge variant="warning">Gửi thành công</b-badge>
+                        <b-badge variant="warning">Completed</b-badge>
                       </div>
                     </td>
                     <td></td>
@@ -295,6 +295,9 @@ export default {
 .editcategory:active {
   color: #212529;
   background-color: #189ce9 !important;
+}
+.search-{
+  margin-bottom: 20px;
 }
 .b-submit {
   background-color: rgb(248, 23, 23);

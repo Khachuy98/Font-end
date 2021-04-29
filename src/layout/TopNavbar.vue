@@ -11,7 +11,7 @@
             <b>{{nameSLo}}</b>
           </li>
           <li class="nav-item">
-            <a href="/login"  class="nav-link">
+            <a href="/login"   class="nav-link">
               Log out
             </a>
           </li>
@@ -76,4 +76,10 @@ import axios from 'axios'
   .my-2 my-sm-search{
     border-radius: 12px;
   }
+  footer.bg3.p-t-75.p-b-32 {
+    position: absolute;
+    width: 100%;
+    /* height: 100%; */
+    bottom: 0;
+}
 </style>

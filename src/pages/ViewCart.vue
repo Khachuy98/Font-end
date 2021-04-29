@@ -19,7 +19,7 @@
             @click="payment(data.id)"
             >Payment</b-button
           >
-          <b-button variant="danger" size="sm" @click="delete data.id"
+          <b-button variant="danger" size="sm" @click="delete(data.id)"
             >Remove</b-button
           >
         </template>
@@ -157,27 +157,22 @@ export default {
         {
           key: "img",
           label: "Image",
-          sortable: true
         },
         {
           key: "size",
           label: "Size",
-          sortable: true
         },
         {
           key: "color",
           label: "Color",
-          sortable: true
         },
         {
           key: "quantity",
           label: "Quantity",
-          sortable: true
         },
         {
           key: "total",
           label: "Total",
-          sortable: true
         },
         {
           key: "actions",

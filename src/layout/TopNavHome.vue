@@ -42,4 +42,7 @@ export default {};
         z-index: 1000;
         background-color: white;
     }
+    .cart-bt{
+      margin: 15px 15px;
+    }
 </style>

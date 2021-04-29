@@ -42,22 +42,30 @@ return new Promise((resolve, reject) => {
 commit('auth_request')
 axios({url: 'http://127.0.0.1:8000/api/login', data: username, method: 'POST' })
 .then(resp => {
+    console.log(resp.data.code)
+    if(resp.data.code == "100"){
+        alert("Tài khoản hoặc mật khẩu không đúng!");
+    }else{
+        alert("Đăng nhập thành công")
+        console.log(resp.data.error)
+        // const { status_code, ...infor } = resp.data;
+        console.log(resp.data.data,"dATA");
+            // for (let i = 0; i < resp.data.data.length; i++) {
+            //   console.log(i);        
+            // }
+            resp.data.data.map((resItem)=>{
+                console.log(resItem);
+        
+        
+        
+                localStorage.setItem('auth', JSON.stringify(resItem));
+        
+        
+                axios.defaults.headers.common['Authorization'] = 'Bearer '+ resItem.token
+            })
+    }
     
-// const { status_code, ...infor } = resp.data;
-console.log(resp.data.data,"dATA");
-    // for (let i = 0; i < resp.data.data.length; i++) {
-    //   console.log(i);        
-    // }
-    resp.data.data.map((resItem)=>{
-        console.log(resItem);
 
-
-
-        localStorage.setItem('auth', JSON.stringify(resItem));
-
-
-        axios.defaults.headers.common['Authorization'] = 'Bearer '+ resItem.token
-    })
   
 
 console.log(resp.data.token ,"TOKEN");
@@ -101,8 +109,7 @@ return new Promise((resolve, reject) => {
 commit('auth_request')
 axios({url: 'http://127.0.0.1:8000/auth/register/', data: user, method: 'POST' })
 .then(resp => {
-
-
+    
 const { status_code, ...infor } = resp.data;
 
 
