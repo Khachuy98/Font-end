@@ -8,6 +8,9 @@ import Shop from 'src/pages/Shop.vue'
 import Contact from 'src/pages/Contact.vue'
 import About from 'src/pages/About.vue'
 import ViewCart from 'src/pages/ViewCart.vue'
+import LoginPage from 'src/pages/LoginPage.vue'
+import Register from 'src/pages/Register.vue'
+import ProductDetail from 'src/pages/ProductDetail.vue'
 // Admin pages
 import Overview from 'src/admin/Overview.vue'
 import UserProfile from 'src/admin/UserProfile.vue'
@@ -18,6 +21,7 @@ import Suppliers from 'src/admin/Suppliers.vue'
 import Users from 'src/admin/Users.vue'
 import Notifications from 'src/admin/Notifications.vue'
 import Login from 'src/admin/Login.vue'
+
 
 const routes = [
     {
@@ -57,6 +61,21 @@ const routes = [
         path: '/viewcart',
         name: 'viewcart',
         component: ViewCart
+    },
+    {
+        path: '/loginpage',
+        name: 'loginpage',
+        component: LoginPage
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: Register
+    },
+    {
+        path: '/productdetail',
+        name: 'productdetail',
+        component: ProductDetail
     },
     {
         path: '/admin',

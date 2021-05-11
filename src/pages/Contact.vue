@@ -2,14 +2,14 @@
   <div class="contact">
     <b-card
     overlay
-    img-src="https://picsum.photos/900/250/?image=3"
+    img-src="https://res.cloudinary.com/e-handel-9000-aps/image/upload/v1613379053/topbilleder-brands-vans_xzxieg.jpg"
     img-alt="Card Image"
     text-variant="white"
     >
-    <h2>Contact</h2>
+    <!-- <h2>Contact</h2>
     <b-card-text class="ct text">
       Thank you for your support and use of the store's products.
-    </b-card-text>
+    </b-card-text> -->
     </b-card>
     <b-row class="submit">
         <b-col lg="6">
@@ -61,7 +61,7 @@ h2 {
   text-transform: uppercase;
 }
 h4{
-    text-align: center;
+    text-align: left;
     margin-top: 25px;
     text-transform: uppercase;
 }

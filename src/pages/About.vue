@@ -2,7 +2,7 @@
   <div class="about">
     <b-card
         overlay
-        img-src="https://picsum.photos/900/250/?image=3"
+        img-src="https://discoverthebridge.com/wp-content/uploads/2018/01/Staff-And-Leadership.jpg"
         img-alt="Card Image"
         text-variant="white"
     >

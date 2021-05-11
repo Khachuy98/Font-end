@@ -9,20 +9,24 @@ import Contact from '../pages/Contact.vue'
 import Home from '../pages/Home.vue'
 import About from '../pages/About.vue'
 import MobileMenu from './MobileMenu.vue'
-import CartModal from '../pages/CartModal.vue'
 import BaseDropdown from '../components/BaseDropdown.vue'
 import TopNavHome from './TopNavHome.vue'
 import ViewCart from '../pages/ViewCart.vue'
+import LoginPage from '../pages/LoginPage.vue'
+import Register from '../pages/Register'
+import ProductDetail from '../pages/ProductDetail.vue'
 export default {
   components: {
     Home,
     About,
     MobileMenu,
     Contact,
-    CartModal,
     BaseDropdown,
     TopNavHome,
     ViewCart,
+    LoginPage,
+    Register,
+    ProductDetail
   },
   methods: {
         toggleSidebar () {

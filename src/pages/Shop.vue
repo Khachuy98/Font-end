@@ -1,6 +1,6 @@
 <template>
   <div class="allproduct">
-    <h2 class="boild">Category</h2>
+    <h2 class="boild">Shop By Category</h2>
     <div>
       <b-card no-body>
         <b-tabs card>
@@ -42,13 +42,12 @@
                         {{ formatPrice(product.import_price) }}.Đ
                       </div>
                     </div>
-                    <a
-                      href="#"
-                      @click="getDetail(product.id)"
-                      class="showModal"
-                      v-b-modal.modalshow
-                      >QuickView</a
+                    <router-link
+                      to="/productdetail"
+                      @click="getDetail(product1.id)"
                     >
+                      <b-button class="showModal">View Product</b-button>
+                    </router-link>
                     <p>{{ product.name }}</p>
                   </div>
                 </b-col>
@@ -102,13 +101,12 @@
                             {{ formatPrice(product1.import_price) }}.Đ
                           </div>
                         </div>
-                        <a
-                          href="#"
+                        <router-link
+                          to="/productdetail"
                           @click="getDetail(product1.id)"
-                          class="showModal"
-                          v-b-modal.modalshow
-                          >QuickView</a
                         >
+                          <b-button class="showModal">View Product</b-button>
+                        </router-link>
                         <p>{{ product1.name }}</p>
                       </div>
                     </b-col>
@@ -119,86 +117,6 @@
           </div>
         </b-tabs>
       </b-card>
-      <div class="modalcart">
-        <b-modal id="modalshow" hide-footer size="xl">
-          <div class="wrapmodal">
-            <div class="container">
-              <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
-                <b-row>
-                  <b-col lg="5">
-                    <b-card img-alt="Image">
-                      <div class="content_img">
-                        <div v-if="sale != null">
-                          <b-badge class="sale" variant="danger"
-                            >{{ sale }}%
-                          </b-badge>
-                        </div>
-                        <img
-                          style="max-width: 20rem, max-height: 20rem"
-                          :src="'http://127.0.0.1:8000/uploads/product/' + img"
-                        />
-                      </div>
-                    </b-card>
-                  </b-col>
-                  <b-col lg="6">
-                    <h4>
-                      {{ name }}
-                    </h4>
-                    <div v-if="ex_price != null">
-                      <div class="importpr">
-                        <strike>{{ formatPrice(im_price) }}.Đ</strike>
-                      </div>
-                      <div class="salepr">{{ formatPrice(ex_price) }}.Đ</div>
-                    </div>
-                    <div v-else>
-                      <div class="importpr">{{ formatPrice(im_price) }}.Đ</div>
-                    </div>
-                    <div class="choose">
-                      <b-form-select
-                        class="size"
-                        v-model="selected"
-                        :options="size"
-                      ></b-form-select>
-                      <b-form-select
-                        class="color"
-                        v-model="selecteds"
-                        :options="color"
-                      ></b-form-select>
-                      <b-form-spinbutton
-                        class="count"
-                        id="demo-sb"
-                        v-model="value"
-                        min="1"
-                        max="50"
-                      ></b-form-spinbutton>
-                      <div class="actions">
-                        <b-button
-                          class="addtocart"
-                          pill
-                          variant="info"
-                          @click="addItemToCart(product)"
-                          >Add to cart</b-button
-                        >
-                        <!-- <b-button
-                        class="buynow"
-                        pill
-                        variant="info"
-                        @click="addItemToCart(product)"
-                        >Buy now</b-button
-                      > -->
-                      </div>
-                    </div>
-                    <b-card-text>
-                      Some quick example text to build on the card title and
-                      make up the bulk of the card's content.
-                    </b-card-text>
-                  </b-col>
-                </b-row>
-              </div>
-            </div>
-          </div>
-        </b-modal>
-      </div>
     </div>
     <top-nav-home />
     <content-footer-home />
@@ -208,13 +126,12 @@
 <script>
 import ContentFooterHome from "../components/Footer/ContentFooterHome.vue";
 import TopNavHome from "../layout/TopNavHome.vue";
-import CartModal from "./CartModal.vue";
 import Vue from "vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
 import Swal from "sweetalert2";
 export default {
-  components: { CartModal, TopNavHome, ContentFooterHome },
+  components: { TopNavHome, ContentFooterHome },
   data() {
     return {
       img: null,
@@ -409,9 +326,8 @@ export default {
   float: right;
   position: absolute;
 
-      right: 141px;
-    top: 33px;
-
+  right: 141px;
+  top: 33px;
 }
 .products {
   margin-top: 50px;
@@ -420,7 +336,7 @@ export default {
   height: 260px;
   max-width: 100%;
 }
-.content_img{
+.content_img {
   position: relative;
 }
 </style>

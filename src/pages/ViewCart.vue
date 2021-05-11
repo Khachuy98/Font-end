@@ -1,135 +1,77 @@
 <template>
   <div class="viewcart-1">
-    <h2>View Cart</h2>
-    <b-container fluid class="content">
-      <b-table
-        sticky-header
-        class="table-ct"
-        striped
-        hover
-        :items="items"
-        :fields="fields"
-        head-variant="dark"
-      >
-        <template v-slot:cell(actions)="data">
-          <b-button
-            variant="primary"
-            size="sm"
-            class="mr-2"
-            @click="payment(data.id)"
-            >Payment</b-button
-          >
-          <b-button variant="danger" size="sm" @click="delete(data.id)"
-            >Remove</b-button
-          >
-        </template>
-      </b-table>
-      <b-button class="paym" variant="primary" v-b-modal.modal-center
-        >Payment</b-button
-      >
-      <b-link class="comeback" href="#" to="/home">
-        <b-icon icon="arrow-return-left"></b-icon>
-        Continue Purchase</b-link
-      >
-    </b-container>
-    <top-nav-home />
-    <content-footer-home />
-    <b-modal size="xl" class="pay" id="modal-center" hide-footer>
-      <h3>Shoes Store</h3>
+    <header class="container-view">
+      <h1>View Cart</h1>
+      <ul class="breadcrumb">
+        <li>Home</li>
+        <li>View Cart</li>
+      </ul>
+      <!-- <span class="count">{{ itemCount }} items in the bag</span> -->
+    </header>
+    <b-container fluid="xl" class="container">
       <b-row>
-        <b-col lg="4">
-          <b-form-input
-            class="ipmd"
-            v-model="text"
-            placeholder="Enter your phone number"
-          ></b-form-input>
-          <b-form-input
-            class="ipmd"
-            v-model="text"
-            placeholder="Enter your email"
-          ></b-form-input>
-          <b-form-input
-            class="ipmd"
-            v-model="text"
-            placeholder="Enter your name"
-          ></b-form-input>
-          <b-form-input
-            class="ipmd"
-            v-model="text"
-            placeholder="Enter your adress"
-          ></b-form-input>
+        <b-col lg="6">
+          <div class="thumbnail">
+            <b-img
+              class="img-product"
+              left
+              src="https://assets.adidas.com/images/w_600,f_auto,q_auto/33a1f66c4e0b41c4b9d2ac91005f9db9_9366/Giay_UltraBoost_21_DJen_FY0306_01_standard.jpg"
+              alt="Left image"
+            ></b-img>
+          </div>
+          <div class="detail">
+            <h4 class="name">Adidas UltraBoost 21</h4>
+            <p class="des">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </p>
+            <b-badge variant="light" class="price">$350</b-badge>
+          </div>
         </b-col>
-        <b-col lg="4">
-          <b-form-textarea
-            class="ipmd"
-            id="textarea"
-            v-model="text"
-            placeholder="Enter description"
-            rows="4"
-            max-rows="8"
-          ></b-form-textarea>
-          <b-form-radio
-            class="ipmd"
-            v-model="selected"
-            :aria-describedby="ariaDescribedby"
-            name="some-radios"
-            value="Thanh toán khi nhận hàng"
-            >Payment on delivery</b-form-radio
-          >
-          <b-form-radio
-            class="ipmd"
-            v-model="selected"
-            :aria-describedby="ariaDescribedby"
-            name="some-radios"
-            value="Chuyển khoản"
-            v-b-toggle.collapse-1
-            >Transfer payments
-            <b-collapse id="collapse-1" class="mt-2">
-              <div
-                id="divmethod"
-                class="divmethod"
-                style="overflow: hidden; display: block"
-              >
-                <strong
-                  >Ngân hàng Vietcombank (Ngân hàng ngoại thương Việt
-                  Nam)</strong
-                ><br />
-                - Số tài khoản: 52480201022<br />
-                - Chủ tài khoản: Bùi Khắc Huy<br />
-                - Chi nhánh: Lê Thành Phương - Phường 2
+        <b-col>
+          <div class="quantity">
+            <b-form-spinbutton
+              id="demo-sb"
+              v-model="value"
+              min="1"
+              max="100"
+            ></b-form-spinbutton>
+          </div>
+          <div class="remove">
+            <b-icon icon="backspace"></b-icon>
+          </div>
+        </b-col>
+        <b-col lg="3">
+          <div class="bill">
+            <b-col class="col-right">
+              <div class="total_cart">
+                <div class="cart-caculation">
+                  <div class="or-summary">
+                    <h4 style="text-decoration: underline">ORDER SUMMARY</h4>
+                    <div class="count-product">
+                      <p>2 PRODUCTS</p>
+                    </div>
+                    <div class="price-total">
+                      <p>Product total: <b-badge>$600</b-badge></p>
+                    </div>
+                    <div>
+                      <p>Total: <b-badge>$600</b-badge></p>
+                    </div>
+                    <div>
+                      <b-button block variant="dark"
+                        >Check out <b-icon icon="arrow-right"></b-icon
+                      ></b-button>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </b-collapse>
-          </b-form-radio>
-        </b-col>
-        <b-col lg="4">
-          <h3>Invoice Details</h3>
-          <b-table
-            sticky-header
-            class="table-bill"
-            striped
-            hover
-            :items="bill"
-            :fields="info"
-          >
-            <template v-slot:cell(actions)="data">
-              <b-icon
-                icon="backspace"
-                aria-hidden="true"
-                size="sm"
-                @click="delete data.id"
-              ></b-icon>
-            </template>
-          </b-table>
-          <div class="total">
-            <div>Total:</div>
-            <b-badge variant="light" class="prtotal">$25.54</b-badge>
+            </b-col>
           </div>
         </b-col>
       </b-row>
-      <b-button pill variant="success" class="btsubmit"
-        >Order Complete</b-button
-      >
-    </b-modal>
+    </b-container>
+
+    <top-nav-home />
+    <content-footer-home />
   </div>
 </template>
 
@@ -148,23 +90,11 @@ export default {
       fields: [
         {
           key: "name",
-          label: "Product Name"
+          label: "Product Name",
         },
         {
           key: "price",
-          label: "Price"
-        },
-        {
-          key: "img",
-          label: "Image",
-        },
-        {
-          key: "size",
-          label: "Size",
-        },
-        {
-          key: "color",
-          label: "Color",
+          label: "Price",
         },
         {
           key: "quantity",
@@ -176,88 +106,169 @@ export default {
         },
         {
           key: "actions",
-          label: "Actions"
-        }
+          label: "Actions",
+        },
       ],
       items: [
         {
           name: "Huy",
           price: "120 vnd",
-          img: "23",
-          size: "39",
-          color: "đen",
-          quantity:"2",
-          total: "240 vnd"
-        }
+          quantity: "2",
+          total: "240 vnd",
+        },
       ],
       info: [
         {
           key: "name",
-          label: ""
-        },
-        {
-          key: "size",
-          label: ""
-        },
-        {
-          key: "color",
-          label: ""
+          label: "",
         },
         {
           key: "amount",
-          label: ""
+          label: "",
         },
         {
           key: "price",
-          label: ""
+          label: "",
         },
         {
           key: "actions",
-          label: ""
-        }
+          label: "",
+        },
       ],
       bill: [
         {
           name: "Adidas",
-          size: "Size40",
-          color: "Black",
           amount: "1",
-          price: "$25.54"
+          price: "$25.54",
         },
         {
           name: "Converse",
-          size: "Size41",
-          color: "Black",
           amount: "1",
-          price: "$30.25"
-        }
-      ]
+          price: "$30.25",
+        },
+      ],
     };
   },
-    created() {
-      this.getItem();
+  created() {
+    this.getItem();
   },
-  methods:{
-    getItem(){
-      axios.get(`http://127.0.0.1:8000/api/view-cart`)
-      .then((resp) =>{
-        console.log(resp);
-        console.log("đã có đata");
-      })
-      .then((res) => {
-         console.log(res);
-        console.log("đã có đata 11");
-      })
-     
-    }
-  }
-  
+  methods: {
+    getItem() {
+      axios
+        .get(`http://127.0.0.1:8000/api/view-cart`)
+        .then((resp) => {
+          console.log(resp);
+          console.log("đã có đata");
+        })
+        .then((res) => {
+          console.log(res);
+          console.log("đã có đata 11");
+        });
+    },
+  },
 };
 </script>
 
 <style scoped>
+.total-price {
+  float: right;
+}
+.row {
+  position: relative;
+  overflow: auto;
+  width: 100%;
+  float: left;
+}
+.total_cart {
+  background-color: rgb(177, 172, 172);
+  max-width: 500px;
+  padding: 15px 15px 15px 15px;
+  /* float: right; */
+}
+.cart-caculation {
+  background-color: white;
+  padding: 10px 10px;
+}
+.left {
+  width: 70%;
+}
+.price-total {
+  display: inline-block;
+}
+.col-right {
+  float: right;
+  max-width: 450px;
+  /* bottom: 25rem; */
+  /* margin-right: 11rem; */
+}
+.container-view {
+  margin: 5px 20px 5px 20px;
+}
+.container {
+  width: 100%;
+  margin: 0 auto;
+  overflow: auto;
+}
+header.container {
+  margin-bottom: 1.5rem;
+}
+
+header .breadcrumb {
+  color: #7d7d7d;
+}
+
+header .breadcrumb li {
+  float: left;
+  padding: 0 6px;
+  height: 20px;
+  line-height: 20px;
+}
+
+header .breadcrumb li:first-child {
+  padding-left: 2px;
+}
+
+header .breadcrumb li:not(:last-child)::after {
+  content: " \276f";
+  padding-left: 8px;
+}
+
+header .count {
+  float: right;
+  color: #333333;
+  height: 20px;
+  line-height: 20px;
+}
+.detail {
+  padding: 0 0.5rem;
+  line-height: 2.2rem;
+  margin-left: 15rem;
+}
+.detail .name {
+  font-size: 1.2rem;
+}
+.detail .price {
+  font-size: 1.5rem;
+}
+.detail .des {
+  color: #7d7d7d;
+  font-size: 1rem;
+}
 .viewcart-1 {
   margin-top: 80px;
+}
+.quantity {
+  display: inline-block;
+  width: 170px;
+  height: 70px;
+  position: relative;
+  margin-top: 63px;
+}
+.remove {
+  /* position: relative; */
+  margin-left: 12rem;
+  /* margin-bottom: -19px; */
+  margin-top: -59px;
 }
 h3 {
   text-align: center;
@@ -271,6 +282,11 @@ h2 {
 }
 .content {
   margin-bottom: 30px;
+}
+.thumbnail {
+  max-width: 200px;
+  float: left;
+  margin-bottom: 20px;
 }
 .table-ct {
   color: black;
@@ -289,6 +305,9 @@ h2 {
 .paym {
   display: block !important;
   margin: 30px auto 0 !important;
+}
+.img-product {
+  width: 200px;
 }
 .comeback {
   margin-bottom: 30px !important;

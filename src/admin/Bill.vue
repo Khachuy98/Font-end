@@ -11,6 +11,7 @@
               @keyup="searchUnit"
             ></b-form-input>
           </b-nav-form>
+                    <h3>Bill List</h3>
           <card
             class="strpied-tabled-with-hover"
             body-classes="table-full-width table-responsive"
@@ -56,16 +57,15 @@
                       </div>
                     </td>
                     <td>
-                      <b-button variant="outline-info" @click="dd(bill.id)"
-                        >Show</b-button
-                      >
-                      <b-button variant="outline-primary" @click="edit(bill.id)"
-                        >Check</b-button
-                      >
-                      <b-button
-                        variant="outline-danger"
+                      <b-icon class="ic-see" icon="eye" @click="dd(bill.id)"
+                        >Show</b-icon
+                      >/
+                      <b-icon class="ic-check" icon="check2" @click="edit(bill.id)"
+                        >Check</b-icon
+                      >/
+                      <b-icon class="ic-remove" icon="x"
                         @click="delete1(bill.id)"
-                        >Hủy</b-button
+                        >Hủy</b-icon
                       >
                     </td>
                   </tr>
@@ -115,16 +115,15 @@
                       </div>
                     </td>
                     <td>
-                      <b-button variant="outline-info" @click="dd(bill.id)"
-                        >Show</b-button
-                      >
-                      <b-button variant="outline-primary" @click="edit(bill.id)"
-                        >Check</b-button
-                      >
-                      <b-button
-                        variant="outline-danger"
+                      <b-icon class="ic-see" icon="eye" @click="dd(bill.id)"
+                        >Show</b-icon
+                      >/
+                      <b-icon class="ic-check" icon="check2" @click="edit(bill.id)"
+                        >Check</b-icon
+                      >/
+                      <b-icon class="ic-remove" icon="x"
                         @click="delete1(bill.id)"
-                        >Hủy</b-button
+                        >Hủy</b-icon
                       >
                     </td>
                   </tr>
@@ -314,5 +313,23 @@ export default {
   display: inline;
   cursor: pointer;
   border-radius: 5px;
+}
+.ic-see{
+  color: #4ce90e;
+  margin-right: 10px;
+  margin-left: 10px;
+  font-size: 20px;
+}
+.ic-check{
+  color: #3268ff;
+  margin-right: 10px;
+  margin-left: 10px;
+  font-size: 20px;
+}
+.ic-remove{
+  color: #e90e0e;
+  margin-right: 10px;
+  margin-left: 10px;
+  font-size: 20px;
 }
 </style>

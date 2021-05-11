@@ -8,13 +8,16 @@
               <b-dropdown-item href="#">Setting</b-dropdown-item>
               <b-dropdown-item href="#">Change Password</b-dropdown-item>
             </b-dropdown> -->
-            <b>{{nameSLo}}</b>
+            <b-badge class="user-name" variant="light" >{{nameSLo}}</b-badge>
           </li>
-          <li class="nav-item">
+           
+          <!-- <li class="nav-item">
             <a href="/login"   class="nav-link">
               Log out
             </a>
-          </li>
+          </li> -->
+          <router-link class="log_out" to="/login"><b-badge  variant="danger" > </b-badge>Logout</router-link>
+          
         </ul>
       </div>
     </div>
@@ -77,9 +80,23 @@ import axios from 'axios'
     border-radius: 12px;
   }
   footer.bg3.p-t-75.p-b-32 {
-    position: absolute;
+    /* position: absolute; */
     width: 100%;
     /* height: 100%; */
     bottom: 0;
+    margin-top: 50px;
+}
+.user-name{
+  font-size: 16px;
+}
+.user-name:hover{
+  color: rgb(162, 100, 219);
+}
+.log_out{
+  margin-left: 20px;
+}
+.log_out:hover{
+  color: rgb(248, 20, 20);
+
 }
 </style>

@@ -27,7 +27,6 @@ status: '',
 token: localStorage.getItem('token') || '',
 username : {},
 admin:"",
-superuser:"",
 },
 
 getters : {
